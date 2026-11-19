@@ -1,0 +1,8 @@
+build/
+external/_deps/
+.vs/
+.vscode/
+CMakeUserPresets.json
+ticket.txt
+fps_results.md
+*.user
