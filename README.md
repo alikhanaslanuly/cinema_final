@@ -28,12 +28,13 @@ chmod +x build.sh && ./build.s
 - WASD & Mouse - Movement (hold shift to run)
 - Left Mouse Button - Select
 - T - Turn on/off shadows
+- Q - Toggle shadows quality 512 / 1024
 - Arrow keys - Move light source
 - P - Pause animation
 - O - Switch camera view
 - V - Turn on/off V-Sync
 - [ , ] - Reduce/Increase bias
-- K - Switch PCF core (1x1/3x3/5x5)
+- K - Switch PCF kernel (1x1/3x3/5x5)
 - C - Switch culling depth
 - F5 - Start FPS benchmark
 - F6 - Reload shaders
@@ -50,6 +51,6 @@ chmod +x build.sh && ./build.s
 - Dear ImGui - UI elements
 
 ### Technologies
-- CMake - Building system
-- C++17 - Language standard
 - OpenGL 3.3 Core
+- C++17 - Language standard
+- CMake - Building system
