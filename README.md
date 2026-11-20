@@ -14,21 +14,10 @@ Open project folder in Visual Studio, or run `build.bat`
 ### Linux
 **Prerequisites**: CMake
 
-Run `chmod +x build.sh && ./build.sh`
-
-## Libraries and Technologies Used
-
-### Libraries
-- GLFW - Window and input
-- GLAD - GL initialization
-- glm - Math helpers
-- stb_image - Textures decoding
-- Dear ImGui - UI elements
-
-### Technologies
-- CMake - Building system
-- C++17 - Language standard
-- OpenGL 3.3 Core
+Run:
+```
+chmod +x build.sh && ./build.s
+```
 
 ## Controls
 
@@ -46,3 +35,17 @@ Run `chmod +x build.sh && ./build.sh`
 - F6 - Reload shaders
 - F1/H - Help
 - Esc - Back or exit
+
+## Libraries and Technologies Used
+
+### Libraries
+- GLFW - Window and input
+- GLAD - GL initialization
+- glm - Math helpers
+- stb_image - Textures decoding
+- Dear ImGui - UI elements
+
+### Technologies
+- CMake - Building system
+- C++17 - Language standard
+- OpenGL 3.3 Core
