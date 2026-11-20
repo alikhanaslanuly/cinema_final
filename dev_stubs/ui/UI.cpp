@@ -94,6 +94,9 @@ UiAction draw(const Game& game, const SeatGrid& seats, const Hud& hud) {
                 ImGui::Text("Сохранено в ticket.txt");
                 if (ImGui::Button("В зал", ImVec2(140, 40))) act = UiAction::Back;
             } else {
+                if (const Seat* s = (game.selectedSeat() >= 0 ? &seats.seats()[game.selectedSeat()] : nullptr)) {
+                    ImGui::Text("Ряд %d, место %d, сеанс: %s", s->row + 1, s->col + 1, "20:00");
+                }
                 if (ImGui::Button("Купить", ImVec2(140, 40))) act = UiAction::Buy;
                 ImGui::SameLine();
                 if (ImGui::Button("Назад", ImVec2(140, 40))) act = UiAction::Back;
