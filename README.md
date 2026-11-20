@@ -20,7 +20,7 @@ Open project folder in Visual Studio, or run `build.bat`
 
 Run:
 ```
-chmod +x build.sh && ./build.s
+chmod +x build.sh && ./build.sh
 ```
 
 ## Controls
