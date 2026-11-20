@@ -9,10 +9,14 @@ Computer Graphics Fundamentals SE-2409 Final Project
 ### Windows
 **Prerequisites**: Visual Studio 2019/2022, CMake in PATH
 
+**Tested on** Windows 10, Visual Studio 2022
+
 Open project folder in Visual Studio, or run `build.bat`
 
 ### Linux
 **Prerequisites**: CMake
+
+**Tested on** Kubuntu 26.04
 
 Run:
 ```
