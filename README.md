@@ -29,3 +29,20 @@ Run `chmod +x build.sh && ./build.sh`
 - CMake - Building system
 - C++17 - Language standard
 - OpenGL 3.3 Core
+
+## Controls
+
+- WASD & Mouse - Movement (hold shift to run)
+- Left Mouse Button - Select
+- T - Turn on/off shadows
+- Arrow keys - Move light source
+- P - Pause animation
+- O - Switch camera view
+- V - Turn on/off V-Sync
+- [ , ] - Reduce/Increase bias
+- K - Switch PCF core (1x1/3x3/5x5)
+- C - Switch culling depth
+- F5 - Start FPS benchmark
+- F6 - Reload shaders
+- F1/H - Help
+- Esc - Back or exit
