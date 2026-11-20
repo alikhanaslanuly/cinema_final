@@ -4,7 +4,7 @@
 #include "game/AppState.h"
 #include "scene/SeatGrid.h"
 
-// STUB (real: Arman). Scenario state machine MENU -> HALL -> PREVIEW -> CONFIRM -> PURCHASED.
+// Scenario state machine MENU -> HALL -> PREVIEW -> CONFIRM -> PURCHASED.
 struct Ticket {
     int seatId = -1, row = 0, col = 0;
     std::string session;
