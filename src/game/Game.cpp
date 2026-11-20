@@ -4,6 +4,8 @@
 
 void Game::seatPicked(int id, SeatGrid& seats) {
     if (m_state != AppState::Hall) return;
+    if (id < 0 || id >= static_cast<int>(seats.seats().size())) return;
+    if (seats.seats()[id].taken) return;
     m_seat = id;
     m_hasTicket = false;
     seats.setSelected(id);
@@ -33,7 +35,11 @@ void Game::apply(UiAction a, SeatGrid& seats) {
                 seats.setTaken(m_seat, true);
                 seats.setSelected(-1);
                 std::ofstream f("ticket.txt");
-                f << "Cinema ticket\nRow: " << m_ticket.row << "\nSeat: " << m_ticket.col << "\nSession: " << m_ticket.session << "\n";
+                if (!f.is_open()) {
+                    std::fprintf(stderr, "[Game] failed to write ticket.txt\n");
+                } else {
+                    f << "Cinema ticket\nRow: " << m_ticket.row << "\nSeat: " << m_ticket.col << "\nSession: " << m_ticket.session << "\n";
+                }
             }
             break;
         case UiAction::Back:

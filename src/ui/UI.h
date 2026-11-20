@@ -2,7 +2,7 @@
 #include "game/Game.h"
 #include "scene/SeatGrid.h"
 
-// STUB (real: Arman). ImGui screens + HUD + F1 help. Called between ImGuiLayer::beginFrame() and render().
+// ImGui screens + HUD + F1 help. Called between ImGuiLayer::beginFrame() and render().
 namespace ui {
 struct Hud {
     const char* team;

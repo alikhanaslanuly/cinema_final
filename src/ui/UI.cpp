@@ -43,47 +43,6 @@ UiAction draw(const Game& game, const SeatGrid& seats, const Hud& hud) {
         ImGui::Begin(id, nullptr, kPanel);
     };
 
-    if (st == AppState::Menu) {
-        centered("menu", 0.5f);
-        ImGui::Text("Cinema Seat Preview");
-        if (ImGui::Button("Купить билет", ImVec2(220, 50))) act = UiAction::BuyTicket;
-        ImGui::End();
-    } else if (st == AppState::Hall) {
-        ImDrawList* dl = ImGui::GetForegroundDrawList();
-        dl->AddCircle(ImVec2(ds.x * 0.5f, ds.y * 0.5f), 6.0f, IM_COL32(255, 255, 255, 220), 16, 2.0f);
-        ImGui::SetNextWindowPos(ImVec2(ds.x * 0.5f, ds.y - 20), ImGuiCond_Always, ImVec2(0.5f, 1.0f));
-        ImGui::SetNextWindowBgAlpha(0.45f);
-        ImGui::Begin("hint", nullptr, kPanel);
-        ImGui::Text("WASD + мышь: ходить | ЛКМ: выбрать кресло в прицеле | F1: помощь");
-        ImGui::End();
-    } else if (st == AppState::Preview) {
-        centered("preview", 0.9f);
-        ImGui::Text("Вид с места...");
-        ImGui::End();
-    } else if (st == AppState::Confirm) {
-        centered("confirm", 0.88f);
-        int id = game.selectedSeat();
-        if (id >= 0) ImGui::Text("Ряд %d, место %d", seats.seats()[id].row + 1, seats.seats()[id].col + 1);
-        if (ImGui::Button("Выбрать", ImVec2(140, 40))) act = UiAction::Select;
-        ImGui::SameLine();
-        if (ImGui::Button("Назад", ImVec2(140, 40))) act = UiAction::Back;
-        ImGui::End();
-    } else if (st == AppState::Purchased) {
-        centered("purchased", 0.5f);
-        if (const Ticket* t = game.ticket()) {
-            ImGui::Text("БИЛЕТ");
-            ImGui::Separator();
-            ImGui::Text("Ряд: %d   Место: %d   Сеанс: %s", t->row, t->col, t->session.c_str());
-            ImGui::Text("Сохранено в ticket.txt");
-            if (ImGui::Button("В зал", ImVec2(140, 40))) act = UiAction::Back;
-        } else {
-            if (ImGui::Button("Купить", ImVec2(140, 40))) act = UiAction::Buy;
-            ImGui::SameLine();
-            if (ImGui::Button("Назад", ImVec2(140, 40))) act = UiAction::Back;
-        }
-        ImGui::End();
-    }
-
     if (hud.helpVisible) {
         centered("help", 0.5f);
         ImGui::Text("УПРАВЛЕНИЕ");
@@ -100,6 +59,50 @@ UiAction draw(const Game& game, const SeatGrid& seats, const Hud& hud) {
         ImGui::Text("F1 / H        помощь");
         ImGui::Text("Esc           назад / выход");
         ImGui::End();
+    } else {
+        if (st == AppState::Menu) {
+            centered("menu", 0.5f);
+            ImGui::Text("Cinema Seat Preview");
+            if (ImGui::Button("Купить билет", ImVec2(220, 50))) act = UiAction::BuyTicket;
+            ImGui::End();
+        } else if (st == AppState::Hall) {
+            ImDrawList* dl = ImGui::GetForegroundDrawList();
+            dl->AddCircle(ImVec2(ds.x * 0.5f, ds.y * 0.5f), 6.0f, IM_COL32(255, 255, 255, 220), 16, 2.0f);
+            ImGui::SetNextWindowPos(ImVec2(ds.x * 0.5f, ds.y - 20), ImGuiCond_Always, ImVec2(0.5f, 1.0f));
+            ImGui::SetNextWindowBgAlpha(0.45f);
+            ImGui::Begin("hint", nullptr, kPanel);
+            ImGui::Text("WASD + мышь: ходить | ЛКМ: выбрать кресло в прицеле | F1: помощь");
+            ImGui::End();
+        } else if (st == AppState::Preview) {
+            centered("preview", 0.9f);
+            ImGui::Text("Вид с места...");
+            ImGui::End();
+        } else if (st == AppState::Confirm) {
+            centered("confirm", 0.88f);
+            int id = game.selectedSeat();
+            if (id >= 0) ImGui::Text("Ряд %d, место %d", seats.seats()[id].row + 1, seats.seats()[id].col + 1);
+            if (ImGui::Button("Выбрать", ImVec2(140, 40))) act = UiAction::Select;
+            ImGui::SameLine();
+            if (ImGui::Button("Назад", ImVec2(140, 40))) act = UiAction::Back;
+            ImGui::End();
+        } else if (st == AppState::Purchased) {
+            centered("purchased", 0.5f);
+            if (const Ticket* t = game.ticket()) {
+                ImGui::Text("БИЛЕТ");
+                ImGui::Separator();
+                ImGui::Text("Ряд: %d   Место: %d   Сеанс: %s", t->row, t->col, t->session.c_str());
+                ImGui::Text("Сохранено в ticket.txt");
+                if (ImGui::Button("В зал", ImVec2(140, 40))) act = UiAction::Back;
+            } else {
+                if (const Seat* s = (game.selectedSeat() >= 0 ? &seats.seats()[game.selectedSeat()] : nullptr)) {
+                    ImGui::Text("Ряд %d, место %d, сеанс: %s", s->row + 1, s->col + 1, "20:00");
+                }
+                if (ImGui::Button("Купить", ImVec2(140, 40))) act = UiAction::Buy;
+                ImGui::SameLine();
+                if (ImGui::Button("Назад", ImVec2(140, 40))) act = UiAction::Back;
+            }
+            ImGui::End();
+        }
     }
     return act;
 }
