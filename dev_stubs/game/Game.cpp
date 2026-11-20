@@ -4,6 +4,8 @@
 
 void Game::seatPicked(int id, SeatGrid& seats) {
     if (m_state != AppState::Hall) return;
+    if (id < 0 || id >= static_cast<int>(seats.seats().size())) return;
+    if (seats.seats()[id].taken) return;
     m_seat = id;
     m_hasTicket = false;
     seats.setSelected(id);
